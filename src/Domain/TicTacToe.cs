@@ -23,6 +23,16 @@ namespace Domain
             }
         }
 
+        public bool IsBoardFull()
+        {
+            foreach (var cell in board)
+            {
+                if (cell == CellOptions.Empty)
+                    return false;
+            }
+            return true;
+        }
+
         public bool MakeMove(int row, int col)
         {
             int index = row * BoardSize + col;
@@ -80,7 +90,7 @@ namespace Domain
 
         public void PlayGame()
         {
-            while (GetWinner() == CellOptions.Empty)
+            while (GetWinner() == CellOptions.Empty && !IsBoardFull())
             {
                 Console.Clear();
                 PrintBoard();
